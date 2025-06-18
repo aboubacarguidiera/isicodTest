@@ -2,6 +2,8 @@ package org.example.testisicod.entities;
 
 import jakarta.persistence.*;
 
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -10,14 +12,26 @@ public class Action {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+  @NotNull(message = "Le type d'action est obligatoire")
+
   @Enumerated(EnumType.STRING)
   private ActionType type;
+  @NotNull(message = "La date est obligatoire")
+
   private LocalDate heure;
+  @NotNull(message = "L'heure de début est obligatoire")
+
   private LocalDateTime debutPrevu;
+  @NotNull(message = "L'heure de fin est obligatoire")
+
   private LocalDateTime  finPrevu;
+  @NotNull(message = "Le statut est obligatoire")
+  @Enumerated(EnumType.STRING)
 
   private Status status;
-  @ManyToOne()
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "personne_id")
+  @NotNull(message = "La personne est obligatoire")
   private Personne personne;
 
   public void setId(Long id) {

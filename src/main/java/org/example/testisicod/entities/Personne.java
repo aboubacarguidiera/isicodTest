@@ -15,12 +15,13 @@ public class Personne {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
   private String nom;
   private String prenom;
 //  private Status status;
   private Role role;
   @JsonIgnore
-  @OneToMany(mappedBy = "personne")
+  @OneToMany(mappedBy = "personne",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<org.example.testisicod.entities.Action> actionList = new ArrayList<>();
   public Personne() {}
 

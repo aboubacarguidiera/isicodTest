@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: layout(~{::title}, ~{::div})}">
+<head>
+  <title>Liste des personnes</title>
+</head>
+<body>
+<div>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Liste des personnes</h2>
+    <a href="/web/personnes/new" class="btn btn-primary">Nouvelle personne</a>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Rôle</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="personne : ${personnes}">
+        <td th:text="${personne.id}"></td>
+        <td th:text="${personne.nom}"></td>
+        <td th:text="${personne.prenom}"></td>
+        <td th:text="${personne.role}"></td>
+        <td>
+          <a th:href="@{/web/personnes/{id}(id=${personne.id})}"
+             class="btn btn-sm btn-info">Voir</a>
+          <a th:href="@{/web/personnes/{id}/edit(id=${personne.id})}"
+             class="btn btn-sm btn-warning">Modifier</a>
+          <form th:action="@{/web/personnes/{id}/delete(id=${personne.id})}"
+                method="post" style="display: inline;">
+            <button type="submit" class="btn btn-sm btn-danger"
+                    onclick="return confirm('Êtes-vous sûr ?')">Supprimer</button>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>
