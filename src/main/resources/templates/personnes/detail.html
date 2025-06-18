@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: layout(~{::title}, ~{::div})}">
+<head>
+  <title>Détails de la personne</title>
+</head>
+<body>
+<div>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Détails de la personne</h2>
+    <div>
+      <a th:href="@{/web/personnes/{id}/edit(id=${personne.id})}"
+         class="btn btn-warning">Modifier</a>
+      <a href="/web/personnes" class="btn btn-secondary">Retour à la liste</a>
+    </div>
+  </div>
+
+  <!-- Informations personnelles -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5 class="mb-0">Informations personnelles</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-3">
+          <strong>ID:</strong>
+        </div>
+        <div class="col-md-9" th:text="${personne.id}"></div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-3">
+          <strong>Nom:</strong>
+        </div>
+        <div class="col-md-9" th:text="${personne.nom}"></div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-3">
+          <strong>Prénom:</strong>
+        </div>
+        <div class="col-md-9" th:text="${personne.prenom}"></div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-3">
+          <strong>Rôle:</strong>
+        </div>
+        <div class="col-md-9">
+          <span class="badge"
+                th:classappend="${personne.role == T(org.example.testisicod.entities.Role).EMPLOYEE ? 'bg-primary' : 'bg-info'}"
+                th:text="${personne.role}"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Actions associées -->
+  <div class="card">
+    <div class="card-header">
+      <h5 class="mb-0">Actions associées</h5>
+    </div>
+    <div class="card-body">
+      <div th:if="${personne.actionList.empty}" class="text-muted">
+        Aucune action associée à cette personne.
+      </div>
+      <div th:unless="${personne.actionList.empty}">
+        <div class="table-responsive">
+          <table class="table table-sm">
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>Type</th>
+              <th>Date</th>
+              <th>Début prévu</th>
+              <th>Fin prévue</th>
+              <th>Statut</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="action : ${personne.actionList}">
+              <td th:text="${action.id}"></td>
+              <td th:text="${action.type}"></td>
+              <td th:text="${#temporals.format(action.date, 'dd/MM/yyyy')}"></td>
+              <td th:text="${#temporals.format(action.debutPrevu, 'dd/MM/yyyy HH:mm')}"></td>
+              <td th:text="${#temporals.format(action.finPrevu, 'dd/MM/yyyy HH:mm')}"></td>
+              <td>
+                  <span class="badge"
+                        th:classappend="${action.status == T(org.example.testisicod.entities.Status).ENTREE ? 'bg-success' : 'bg-danger'}"
+                        th:text="${action.status}"></span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="mt-4">
+    <form th:action="@{/web/personnes/{id}/delete(id=${personne.id})}"
+          method="post" style="display: inline;">
+      <button type="submit" class="btn btn-danger"
+              onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette personne et toutes ses actions ?')">
+        Supprimer cette personne
+      </button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

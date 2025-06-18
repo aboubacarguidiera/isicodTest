@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: layout(~{::title}, ~{::div})}">
+<head>
+  <title th:text="${personne.id != null ? 'Modifier personne' : 'Nouvelle personne'}">Personne</title>
+</head>
+<body>
+<div>
+  <h2 th:text="${personne.id != null ? 'Modifier personne' : 'Nouvelle personne'}">Personne</h2>
+
+  <form th:action="${personne.id != null ? '/web/personnes/' + personne.id : '/web/personnes'}"
+        th:object="${personne}" method="post" class="row g-3">
+
+    <!-- Nom -->
+    <div class="col-md-6">
+      <label for="nom" class="form-label">Nom *</label>
+      <input type="text" class="form-control" th:field="*{nom}" id="nom" required>
+      <div th:if="${#fields.hasErrors('nom')}" class="text-danger">
+        <small th:errors="*{nom}"></small>
+      </div>
+    </div>
+
+    <!-- Prénom -->
+    <div class="col-md-6">
+      <label for="prenom" class="form-label">Prénom *</label>
+      <input type="text" class="form-control" th:field="*{prenom}" id="prenom" required>
+      <div th:if="${#fields.hasErrors('prenom')}" class="text-danger">
+        <small th:errors="*{prenom}"></small>
+      </div>
+    </div>
+
+    <!-- Rôle -->
+    <div class="col-md-6">
+      <label for="role" class="form-label">Rôle *</label>
+      <select class="form-select" th:field="*{role}" id="role" required>
+        <option value="">Sélectionner un rôle</option>
+        <option th:each="roleOption : ${roles}"
+                th:value="${roleOption}"
+                th:text="${roleOption}"></option>
+      </select>
+      <div th:if="${#fields.hasErrors('role')}" class="text-danger">
+        <small th:errors="*{role}"></small>
+      </div>
+    </div>
+
+    <!-- Boutons -->
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">
+        <span th:text="${personne.id != null ? 'Modifier' : 'Créer'}">Créer</span>
+      </button>
+      <a href="/web/personnes" class="btn btn-secondary ms-2">Annuler</a>
+    </div>
+  </form>
+</div>
+</body>
+</html>

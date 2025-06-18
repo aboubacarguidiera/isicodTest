@@ -40,7 +40,7 @@ public class PersonneController {
   }
   @GetMapping("/prenom/{prenom}")
   public List<Personne> findByPrenom(@PathVariable String prenom){
-    return this.personneService.getPersonneByNom(prenom);
+    return this.personneService.getPersonneByPrenom(prenom);
   }
   @PostMapping("/")
   public Personne save(@RequestBody Personne personne){
