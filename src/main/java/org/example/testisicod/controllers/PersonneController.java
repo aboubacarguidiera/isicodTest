@@ -1,4 +1,4 @@
-package org.example.testisicod.controllers;
+/*package org.example.testisicod.controllers;
 
 import org.example.testisicod.entities.Action;
 import org.example.testisicod.entities.Personne;
@@ -57,3 +57,4 @@ public class PersonneController {
   }
 
 }
+*/

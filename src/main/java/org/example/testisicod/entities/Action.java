@@ -18,11 +18,11 @@ public class Action {
   private ActionType type;
   @NotNull(message = "La date est obligatoire")
 
-  private LocalDate heure;
-  @NotNull(message = "L'heure de début est obligatoire")
+  private LocalDate date;
+  @NotNull(message = "L'date de début est obligatoire")
 
   private LocalDateTime debutPrevu;
-  @NotNull(message = "L'heure de fin est obligatoire")
+  @NotNull(message = "L'date de fin est obligatoire")
 
   private LocalDateTime  finPrevu;
   @NotNull(message = "Le statut est obligatoire")
@@ -44,9 +44,9 @@ public class Action {
   public Action() {
   }
 
-  public Action(ActionType type, LocalDate heure, LocalDateTime debutPrevu, LocalDateTime finPrevu, Status status, Personne personne) {
+  public Action(ActionType type, LocalDate date, LocalDateTime debutPrevu, LocalDateTime finPrevu, Status status, Personne personne) {
     this.type = type;
-    this.heure = heure;
+    this.date = date;
     this.debutPrevu = debutPrevu;
     this.finPrevu = finPrevu;
     this.status = status;
@@ -77,12 +77,12 @@ public class Action {
     this.type = type;
   }
 
-  public LocalDate getHeure() {
-    return heure;
+  public LocalDate getDate() {
+    return date;
   }
 
-  public void setHeure(LocalDate heure) {
-    this.heure = heure;
+  public void setDate(LocalDate date) {
+    this.date = date;
   }
 
   public Status getStatus() {

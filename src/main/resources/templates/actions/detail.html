@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: layout(~{::title}, ~{::div})}">
+<head>
+  <title>Détails de l'action</title>
+</head>
+<body>
+<div>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Détails de l'action</h2>
+    <div>
+      <a th:href="@{/web/actions/{id}/edit(id=${action.id})}" class="btn btn-warning">Modifier</a>
+      <a href="/web/actions" class="btn btn-secondary">Retour à la liste</a>
+    </div>
+  </div>
+
+  <!-- Informations de l'action -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5 class="mb-0">Informations de l'action</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-3">
+          <strong>ID:</strong>
+        </div>
+        <div class="col-md-9" th:text="${action.id}"></div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-3">
+          <strong>Type:</strong>
+        </div>
+        <div class="col-md-9" th:text="${action.type}"></div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-3">
+          <strong>Date:</strong>
+        </div>
+        <div class="col-md-9" th:text="${#temporals.format(action.date, 'dd/MM/yyyy')}"></div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-3">
+          <strong>Début Prévu:</strong>
+        </div>
+        <div class="col-md-9" th:text="${#temporals.format(action.debutPrevu, 'dd/MM/yyyy HH:mm')}"></div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-3">
+          <strong>Fin Prévue:</strong>
+        </div>
+        <div class="col-md-9" th:text="${#temporals.format(action.finPrevu, 'dd/MM/yyyy HH:mm')}"></div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-3">
+          <strong>Statut:</strong>
+        </div>
+        <div class="col-md-9">
+          <span class="badge"
+                th:classappend="${action.status == T(org.example.testisicod.entities.Status).ENTREE ? 'bg-success' : 'bg-danger'}"
+                th:text="${action.status}"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="mt-4">
+    <form th:action="@{/web/actions/{id}/delete(id=${action.id})}" method="post" style="display: inline;">
+      <button type="submit" class="btn btn-danger"
+              onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette action ?')">
+        Supprimer cette action
+      </button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

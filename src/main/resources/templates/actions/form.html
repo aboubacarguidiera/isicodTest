@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: layout(~{::title}, ~{::div})}">
+<head>
+  <title th:text="${action.id != null ? 'Modifier action' : 'Nouvelle action'}">Action</title>
+</head>
+<body>
+<div>
+  <h2 th:text="${action.id != null ? 'Modifier action' : 'Nouvelle action'}">Action</h2>
+
+  <form th:action="${action.id != null ? '/web/actions/' + action.id : '/web/actions'}"
+        th:object="${action}" method="post" class="row g-3">
+
+    <!-- Type -->
+    <div class="col-md-6">
+      <label for="type" class="form-label">Type *</label>
+      <select class="form-select" th:field="*{type}" id="type" required>
+        <option value="">Sélectionner un type</option>
+        <option th:each="typeOption : ${T(org.example.testisicod.entities.ActionType).values()}"
+                th:value="${typeOption}"
+                th:text="${typeOption}"></option>
+      </select>
+      <div th:if="${#fields.hasErrors('type')}" class="text-danger">
+        <small th:errors="*{type}"></small>
+      </div>
+    </div>
+
+    <!-- Date -->
+    <div class="col-md-6">
+      <label for="date" class="form-label">Date *</label>
+      <input type="date" class="form-control" th:field="*{date}" id="date" required>
+      <div th:if="${#fields.hasErrors('date')}" class="text-danger">
+        <small th:errors="*{date}"></small>
+      </div>
+    </div>
+
+    <!-- Début Prévu -->
+    <div class="col-md-6">
+      <label for="debutPrevu" class="form-label">Début Prévu *</label>
+      <input type="datetime-local" class="form-control" th:field="*{debutPrevu}" id="debutPrevu" required>
+      <div th:if="${#fields.hasErrors('debutPrevu')}" class="text-danger">
+        <small th:errors="*{debutPrevu}"></small>
+      </div>
+    </div>
+
+    <!-- Fin Prévue -->
+    <div class="col-md-6">
+      <label for="finPrevu" class="form-label">Fin Prévue *</label>
+      <input type="datetime-local" class="form-control" th:field="*{finPrevu}" id="finPrevu" required>
+      <div th:if="${#fields.hasErrors('finPrevu')}" class="text-danger">
+        <small th:errors="*{finPrevu}"></small>
+      </div>
+    </div>
+
+    <!-- Statut -->
+    <div class="col-md-6">
+      <label for="status" class="form-label">Statut *</label>
+      <select class="form-select" th:field="*{status}" id="status" required>
+        <option value="">Sélectionner un statut</option>
+        <option th:each="statusOption : ${T(org.example.testisicod.entities.Status).values()}"
+                th:value="${statusOption}"
+                th:text="${statusOption}"></option>
+      </select>
+      <div th:if="${#fields.hasErrors('status')}" class="text-danger">
+        <small th:errors="*{status}"></small>
+      </div>
+    </div>
+
+    <!-- Boutons -->
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">
+        <span th:text="${action.id != null ? 'Modifier' : 'Créer'}">Créer</span>
+      </button>
+      <a href="/web/actions" class="btn btn-secondary ms-2">Annuler</a>
+    </div>
+  </form>
+</div>
+</body>
+</html>

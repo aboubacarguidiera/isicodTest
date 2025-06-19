@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{layout/base :: layout(~{::title}, ~{::div})}">
+      th:replace="~{layout/base :: layout(~{::title}, ~{::div})}"
+>
 <head>
   <title th:text="${personne.id != null ? 'Modifier personne' : 'Nouvelle personne'}">Personne</title>
 </head>
