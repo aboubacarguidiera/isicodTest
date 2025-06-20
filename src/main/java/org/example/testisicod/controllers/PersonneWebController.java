@@ -56,7 +56,6 @@ public class PersonneWebController {
     }
     return "redirect:/web/personnes";
   }
-
   @GetMapping("/{id}/edit")
   public String showEditForm(@PathVariable Long id, Model model) {
     Optional<Personne> personne = personneService.getPersonneById(id);

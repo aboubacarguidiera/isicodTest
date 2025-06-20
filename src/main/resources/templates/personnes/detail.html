@@ -46,7 +46,7 @@
         </div>
         <div class="col-md-9">
           <span class="badge"
-                th:classappend="${personne.role == T(org.example.testisicod.entities.Role).EMPLOYEE ? 'bg-primary' : 'bg-info'}"
+                th:classappend="${personne.role.name() == T(org.example.testisicod.entities.Role).EMPLOYEE ? 'bg-primary' : 'bg-info'}"
                 th:text="${personne.role}"></span>
         </div>
       </div>
@@ -59,10 +59,10 @@
       <h5 class="mb-0">Actions associées</h5>
     </div>
     <div class="card-body">
-      <div th:if="${personne.actionList.empty}" class="text-muted">
+      <div th:if="${personne.actionList.isEmpty()}" class="text-muted">
         Aucune action associée à cette personne.
       </div>
-      <div th:unless="${personne.actionList.empty}">
+      <div th:unless="${personne.actionList.isEmpty()}">
         <div class="table-responsive">
           <table class="table table-sm">
             <thead>
@@ -93,6 +93,9 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="mt-4">
+    <a th:href="@{/web/actions/new/{id}(id=${personne.id})}" class="btn btn-primary">Ajouter une action</a>
   </div>
 
   <!-- Actions -->

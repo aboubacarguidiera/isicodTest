@@ -19,10 +19,10 @@ public class Action {
   @NotNull(message = "La date est obligatoire")
 
   private LocalDate date;
-  @NotNull(message = "L'date de début est obligatoire")
+  @NotNull(message = "La date et l'heure de début sont obligatoires")
 
   private LocalDateTime debutPrevu;
-  @NotNull(message = "L'date de fin est obligatoire")
+  @NotNull(message = "La date et l'heure de fin sont obligatoires")
 
   private LocalDateTime  finPrevu;
   @NotNull(message = "Le statut est obligatoire")

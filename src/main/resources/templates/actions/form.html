@@ -65,7 +65,18 @@
         <small th:errors="*{status}"></small>
       </div>
     </div>
-
+    <div class="col-md-6">
+      <label for="personne" class="form-label">Personne *</label>
+      <select class="form-select" th:field="*{personne.id}" id="personne" required>
+        <option value="">Sélectionner une personne</option>
+        <option th:each="personne : ${personnes}"
+                th:value="${personne.id}"
+                th:text="${personne.nom + ' ' + personne.prenom}"></option>
+      </select>
+      <div th:if="${#fields.hasErrors('personne')}" class="text-danger">
+        <small th:errors="*{personne}"></small>
+      </div>
+    </div>
     <!-- Boutons -->
     <div class="col-12">
       <button type="submit" class="btn btn-primary">

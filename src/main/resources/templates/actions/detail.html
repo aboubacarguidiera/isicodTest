@@ -62,6 +62,14 @@
       </div>
     </div>
   </div>
+  <div class="row mt-2">
+    <div class="col-md-3">
+      <strong>Personne Associée:</strong>
+    </div>
+    <div class="col-md-9">
+      <a th:href="@{/web/personnes/{id}(id=${action.personne.id})}" th:text="${action.personne.nom + ' ' + action.personne.prenom}"></a>
+    </div>
+  </div>
 
   <!-- Actions -->
   <div class="mt-4">
